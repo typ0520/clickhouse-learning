@@ -1,0 +1,66 @@
+<yandex>
+   <remote_servers>
+       <mycluster>
+          <shard>
+             <internal_replication>false</internal_replication>
+             <replica>
+                 <host>ch01</host>
+                 <port>9000</port>
+             </replica>
+            <replica>
+                 <host>ch02</host>
+                 <port>9000</port>
+             </replica>
+          </shard>
+          <shard>
+             <internal_replication>false</internal_replication>
+             <replica>
+                 <host>ch03</host>
+                 <port>9000</port>
+             </replica>
+            <replica>
+                 <host>ch04</host>
+                 <port>9000</port>
+             </replica>
+          </shard>
+          <shard>
+             <internal_replication>false</internal_replication>
+             <replica>
+                 <host>ch05</host>
+                 <port>9000</port>
+             </replica>
+            <replica>
+                 <host>ch06</host>
+                 <port>9000</port>
+             </replica>
+          </shard>
+          <!-- <shard>
+             <internal_replication>false</internal_replication>
+             <replica>
+                 <host>node3</host>
+                 <port>9000</port>
+             </replica>
+          </shard> -->
+       </mycluster>
+   </remote_servers>
+   <zookeeper>
+       <node index="1">
+          <host>zk01</host>
+          <port>2181</port>
+       </node>
+   </zookeeper>
+   <macros>
+       <shard>01</shard>
+       <replica>ch02</replica>
+   </macros>
+   <networks>
+       <ip>::/0</ip>
+   </networks>
+   <ClickHouse_compression>
+       <case>
+          <min_part_size>10000000000</min_part_size>
+          <min_part_size_ratio>0.01</min_part_size_ratio>
+          <method>lz4</method>
+       </case>
+   </ClickHouse_compression>
+</yandex>

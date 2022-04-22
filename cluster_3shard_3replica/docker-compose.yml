@@ -1,0 +1,181 @@
+version: '3'
+
+services:
+  zookeeper:
+    image: "zookeeper:latest"
+    ports:
+      - "2181:2181"
+    hostname: zk01
+    networks:
+      clickhouse-cluster:
+        ipv4_address: 172.18.1.2
+
+  ch-node1:
+    image: "clickhouse/clickhouse-server:22.3.3.44"
+    depends_on:
+      - zookeeper
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    ports:
+      - "8124:8123"
+    volumes:
+      - ./volume/data/node1:/var/lib/clickhouse
+      - ./volume/config/node1/metrika.xml:/etc/clickhouse-server/config.d/metrika.xml
+      - ./volume/log/node1:/var/log/clickhouse-server
+    hostname: ch01
+    networks:
+      clickhouse-cluster:
+        ipv4_address: 172.18.1.5
+    extra_hosts:
+      - "zk01:172.18.1.2"
+      - "ch01:172.18.1.5"
+      - "ch02:172.18.1.6"
+      - "ch03:172.18.1.7"
+      - "ch04:172.18.1.8"
+      - "ch05:172.18.1.9"
+      - "ch06:172.18.1.10"
+
+  ch-node2:
+    image: "clickhouse/clickhouse-server:22.3.3.44"
+    depends_on:
+      - zookeeper
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    ports:
+      - "8125:8123"
+    volumes:
+      - ./volume/data/node2:/var/lib/clickhouse
+      - ./volume/config/node2/metrika.xml:/etc/clickhouse-server/config.d/metrika.xml
+      - ./volume/log/node2:/var/log/clickhouse-server
+    hostname: ch02
+    networks:
+      clickhouse-cluster:
+        ipv4_address: 172.18.1.6
+    extra_hosts:
+      - "zk01:172.18.1.2"
+      - "ch01:172.18.1.5"
+      - "ch02:172.18.1.6"
+      - "ch03:172.18.1.7"
+      - "ch04:172.18.1.8"
+      - "ch05:172.18.1.9"
+      - "ch06:172.18.1.10"
+
+  ch-node3:
+    image: "clickhouse/clickhouse-server:22.3.3.44"
+    depends_on:
+      - zookeeper
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    ports:
+      - "8126:8123"
+    volumes:
+      - ./volume/data/node3:/var/lib/clickhouse
+      - ./volume/config/node3/metrika.xml:/etc/clickhouse-server/config.d/metrika.xml
+      - ./volume/log/node3:/var/log/clickhouse-server
+    hostname: ch03
+    networks:
+      clickhouse-cluster:
+        ipv4_address: 172.18.1.7
+    extra_hosts:
+      - "zk01:172.18.1.2"
+      - "ch01:172.18.1.5"
+      - "ch02:172.18.1.6"
+      - "ch03:172.18.1.7"
+      - "ch04:172.18.1.8"
+      - "ch05:172.18.1.9"
+      - "ch06:172.18.1.10"
+
+  ch-node4:
+    image: "clickhouse/clickhouse-server:22.3.3.44"
+    depends_on:
+      - zookeeper
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    ports:
+      - "8127:8123"
+    volumes:
+      - ./volume/data/node4:/var/lib/clickhouse
+      - ./volume/config/node4/metrika.xml:/etc/clickhouse-server/config.d/metrika.xml
+      - ./volume/log/node4:/var/log/clickhouse-server
+    hostname: ch04
+    networks:
+      clickhouse-cluster:
+        ipv4_address: 172.18.1.8
+    extra_hosts:
+      - "zk01:172.18.1.2"
+      - "ch01:172.18.1.5"
+      - "ch02:172.18.1.6"
+      - "ch03:172.18.1.7"
+      - "ch04:172.18.1.8"
+      - "ch05:172.18.1.9"
+      - "ch06:172.18.1.10"
+
+  ch-node5:
+    image: "clickhouse/clickhouse-server:22.3.3.44"
+    depends_on:
+      - zookeeper
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    ports:
+      - "8128:8123"
+    volumes:
+      - ./volume/data/node5:/var/lib/clickhouse
+      - ./volume/config/node5/metrika.xml:/etc/clickhouse-server/config.d/metrika.xml
+      - ./volume/log/node5:/var/log/clickhouse-server
+    hostname: ch05
+    networks:
+      clickhouse-cluster:
+        ipv4_address: 172.18.1.9
+    extra_hosts:
+      - "zk01:172.18.1.2"
+      - "ch01:172.18.1.5"
+      - "ch02:172.18.1.6"
+      - "ch03:172.18.1.7"
+      - "ch04:172.18.1.8"
+      - "ch05:172.18.1.9"
+      - "ch06:172.18.1.10"
+
+  ch-node6:
+    image: "clickhouse/clickhouse-server:22.3.3.44"
+    depends_on:
+      - zookeeper
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    ports:
+      - "8129:8123"
+    volumes:
+      - ./volume/data/node6:/var/lib/clickhouse
+      - ./volume/config/node6/metrika.xml:/etc/clickhouse-server/config.d/metrika.xml
+      - ./volume/log/node6:/var/log/clickhouse-server
+    hostname: ch06
+    networks:
+      clickhouse-cluster:
+        ipv4_address: 172.18.1.10
+    extra_hosts:
+      - "zk01:172.18.1.2"
+      - "ch01:172.18.1.5"
+      - "ch02:172.18.1.6"
+      - "ch03:172.18.1.7"
+      - "ch04:172.18.1.8"
+      - "ch05:172.18.1.9"
+      - "ch06:172.18.1.10"
+
+networks:
+  clickhouse-cluster:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.1.0/16

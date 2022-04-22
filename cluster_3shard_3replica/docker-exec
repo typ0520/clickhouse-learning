@@ -1,0 +1,4 @@
+#!/bin/bash
+
+name=$1
+docker exec -it $(docker ps | grep "node$name" | awk '{print $1}') /bin/bash
